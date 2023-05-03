@@ -29,8 +29,9 @@
     <tbody>
     <%
         PassengerRepository list = new PassengerRepository();
-        List<Reservation> reservations = list.getReservations();
-        for (int i = 1; i < reservations.size(); i++) {
+        String passengerNo = request.getParameter("PassengerNo");
+        List<Reservation> reservations = list.getReservations(Integer.parseInt(passengerNo));
+        for (int i = 0; i < reservations.size(); i++) {
     %>
     <tr>
         <td><%=reservations.get(i).getReservedDate() %></td>

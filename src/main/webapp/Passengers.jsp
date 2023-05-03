@@ -23,10 +23,10 @@
         <%
             PassengerRepository list = new PassengerRepository();
             List<Passenger> passengers = list.getPassengers();
-            for (int i = 1; i < passengers.size(); i++) {
+            for (int i = 0; i < passengers.size(); i++) {
         %>
         <tr>
-            <td><a href="/ReservationInfo.jsp"><%=passengers.get(i).getPassengerName()%></a></td>
+            <td><a href="/ReservationInfo.jsp?PassengerNo=<%=passengers.get(i).getPassengerNo()%>"><%=passengers.get(i).getPassengerName()%></a></td>
             <td><%=passengers.get(i).getGrade() %></td>
             <td><%=passengers.get(i).getAge() %></td>
         </tr>

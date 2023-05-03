@@ -21,16 +21,17 @@ public class PassengerRepository {
         ResultSet resultSet = null;
 
         try {
-            String sqlQuery = "SELECT PassengerName, Grade, Age FROM Passenger";
+            String sqlQuery = "SELECT PassengerNo, PassengerName, Grade, Age FROM Passenger";
             preparedStatement = myConnection.prepareStatement(sqlQuery);
 
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
                 this.passengerList.add(new Passenger(
-                        resultSet.getString(1),
-                        resultSet.getInt(2),
-                        resultSet.getInt(3)
+                        resultSet.getInt(1),
+                        resultSet.getString(2),
+                        resultSet.getInt(3),
+                        resultSet.getInt(4)
                 ));
             }
 
@@ -41,19 +42,20 @@ public class PassengerRepository {
         return passengerList;
     }
 
-    public List<Reservation> getReservations() {
+    public List<Reservation> getReservations(int passengerNo) {
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
             String sqlQuery =
-                    "SELECT R.ReservedDate, P.PassengerName, F.FlightDate, F.Departures, F.Arrival, F.Price" +
-                            "FROM Passenger AS P " +
-                            "JOIN Reservation AS R ON P.PassengerNo = R.PassengerNo " +
-                            "JOIN Flight AS F ON R.FlightNo = F.FlightNo";
+                    "SELECT R.ReservedDate, P.PassengerName, F.FlightDate, F.Departures, F.Arrival, F.Price\n" +
+                            "FROM Passenger AS P JOIN Reservation AS R ON P.PassengerNo = R.PassengerNo\n" +
+                            "JOIN Flight AS F ON R.FlightNo = F.FlightNo\n" +
+                            "WHERE P.PassengerNo = ?";
 
             preparedStatement = myConnection.prepareStatement(sqlQuery);
+            preparedStatement.setInt(1, passengerNo);
 
             resultSet = preparedStatement.executeQuery();
 
