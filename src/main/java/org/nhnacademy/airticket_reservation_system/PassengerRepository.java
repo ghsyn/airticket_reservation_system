@@ -10,7 +10,8 @@ import java.util.List;
 
 public class PassengerRepository {
     private static final String driverName = "com.mysql.cj.jdbc.Driver";
-    private static final String databaseUrl = "jdbc:mysql://localhost/module06";
+
+    Connection myConnection = DBUtils.getConnection();
 
     List<Passenger> passengerList = new ArrayList<>();
     List<Reservation> reservationList = new ArrayList<>();
@@ -26,12 +27,10 @@ public class PassengerRepository {
     public List<Passenger> getPassengers() {
         loadDriver(driverName);
 
-        Connection myConnection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
-            myConnection = DriverManager.getConnection(databaseUrl, "root", "msluvy");
             String sqlQuery = "SELECT PassengerName, Grade, Age FROM Passenger";
             preparedStatement = myConnection.prepareStatement(sqlQuery);
 
@@ -55,12 +54,10 @@ public class PassengerRepository {
     public List<Reservation> getReservations() {
         loadDriver(driverName);
 
-        Connection myConnection = null;
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
 
         try {
-            myConnection = DriverManager.getConnection(databaseUrl, "root", "msluvy");
             String sqlQuery =
                     "SELECT R.ReservedDate, P.PassengerName, F.FlightDate, F.Departures, F.Arrival, F.Price" +
                             "FROM Passenger AS P " +
