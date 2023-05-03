@@ -1,6 +1,6 @@
 <%@ page import="org.nhnacademy.airticket_reservation_system.list.Passenger" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.nhnacademy.airticket_reservation_system.FlightRepo" %>
+<%@ page import="org.nhnacademy.airticket_reservation_system.PassengerRepository" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -21,7 +21,7 @@
         </thead>
         <tbody>
         <%
-            FlightRepo list = new FlightRepo();
+            PassengerRepository list = new PassengerRepository();
             List<Passenger> passengers = list.getPassengers();
             for (int i = 1; i < passengers.size(); i++) {
         %>

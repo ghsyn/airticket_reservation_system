@@ -1,7 +1,7 @@
 <%@ page import="org.nhnacademy.airticket_reservation_system.list.Reservation" %>
-<%@ page import="org.nhnacademy.airticket_reservation_system.FlightRepo" %>
 <%@ page import="java.util.List" %>
-<%@ page import="org.nhnacademy.airticket_reservation_system.list.Passenger" %><%--
+<%@ page import="org.nhnacademy.airticket_reservation_system.list.Passenger" %>
+<%@ page import="org.nhnacademy.airticket_reservation_system.PassengerRepository" %><%--
   Created by IntelliJ IDEA.
   User: gimsiyeon
   Date: 2023/05/02
@@ -26,24 +26,9 @@
             <th>Price</th>
         </tr>
     </thead>
-<%--    <tbody>--%>
-<%--    <%--%>
-<%--        FlightRepo list = new FlightRepo();--%>
-<%--        List<Reservation> reservations = list.getReservations();--%>
-<%--        for (int i = 0; i < reservations.size(); i++) {--%>
-<%--    %>--%>
-<%--    <tr>--%>
-<%--        <td><a href="/ReservationInfo.jsp"><%=passengers.get(i).getPassengerName()%></a></td>--%>
-<%--        <td><%=passengers.get(i).getGrade() %></td>--%>
-<%--        <td><%=passengers.get(i).getAge() %></td>--%>
-<%--    </tr>--%>
-<%--    <%--%>
-<%--        }--%>
-<%--    %>--%>
-<%--    </tbody>--%>
     <tbody>
     <%
-        FlightRepo list = new FlightRepo();
+        PassengerRepository list = new PassengerRepository();
         List<Reservation> reservations = list.getReservations();
         for (int i = 1; i < reservations.size(); i++) {
     %>
@@ -60,6 +45,6 @@
     %>
     </tbody>
 </table>
-<button type="submit">Back to Passenger List</button>
+<button type="submit" onclick="location.href='Passengers.jsp'">Back to Passenger List</button>
 </body>
 </html>
