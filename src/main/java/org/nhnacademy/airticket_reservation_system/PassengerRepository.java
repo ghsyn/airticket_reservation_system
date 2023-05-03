@@ -9,23 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PassengerRepository {
-    private static final String driverName = "com.mysql.cj.jdbc.Driver";
 
     Connection myConnection = DBUtils.getConnection();
 
     List<Passenger> passengerList = new ArrayList<>();
     List<Reservation> reservationList = new ArrayList<>();
 
-    private void loadDriver(String driverName) {
-        try {
-            Class.forName(driverName);
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-    }
-
     public List<Passenger> getPassengers() {
-        loadDriver(driverName);
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
@@ -52,7 +42,6 @@ public class PassengerRepository {
     }
 
     public List<Reservation> getReservations() {
-        loadDriver(driverName);
 
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
